@@ -28,4 +28,7 @@ In your `.zshrc` file, the following options can be used to customize the plugin
 ```zsh
 # Customize where Bun will be installed:
 export BUN_DIR="$HOME/.bun"
+
+# Enable bun completion:
+export BUN_ENABLE_COMPLETION=true
 ```

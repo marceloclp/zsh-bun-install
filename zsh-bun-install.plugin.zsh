@@ -26,12 +26,15 @@
     [[ -d "$1" ]]
   }
 
+  # Bun installation directory:
+  init_env BUN_DIR $HOME/.bun
+  # Whether to enable bun completion:
+  init_env BUN_ENABLE_COMPLETION true
+
   # @see https://bun.sh/docs/installation
   function install_bun() {
-    init_env BUN_DIR $HOME/.bun
-    
     if ! is_dir $BUN_DIR; then
-      curl -fsSL https://bun.sh/install | BUN_INSTALL=$BUN_DIR bash
+      curl -fsSL https://bun.sh/install | BUN_INSTALL=$BUN_DIR IS_BUN_AUTO_UPDATE=false bash
     fi
 
     if ! is_installed bun; then
@@ -40,5 +43,13 @@
     fi
   }
 
+  # Load bun completion if enabled
+  function load_bun_completion() {
+    if $BUN_ENABLE_COMPLETION; then
+      source $BUN_DIR/_bun
+    fi
+  }
+
   install_bun
+  load_bun_completion
 }
