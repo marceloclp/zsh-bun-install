@@ -35,7 +35,8 @@
     fi
 
     if ! is_installed bun; then
-      add_path $BUN_DIR/bin
+      export BUN_INSTALL=$BUN_DIR
+      add_path $BUN_INSTALL/bin
     fi
   }
 
