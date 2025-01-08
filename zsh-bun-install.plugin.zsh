@@ -45,9 +45,20 @@
 
   # Load bun completion if enabled
   function load_bun_completion() {
-    if $BUN_ENABLE_COMPLETION; then
-      source $BUN_DIR/_bun
+    if ! $BUN_ENABLE_COMPLETION; then return; fi
+
+    # Ensure the cache directory exists:
+    if ! is_dir $ZSH_CACHE_DIR/completions; then
+      mkdir -p $ZSH_CACHE_DIR/completions
     fi
+
+    if [[ ! -f "$ZSH_CACHE_DIR/completions/_bun" ]]; then
+      typeset -g -A _comps
+      autoload -Uz _bun
+      _comps[bun]=_bun
+    fi
+    
+    SHELL=zsh bun completions >| "$ZSH_CACHE_DIR/completions/_bun" &|
   }
 
   install_bun
