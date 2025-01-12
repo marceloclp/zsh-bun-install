@@ -16,7 +16,7 @@
   # Bun installation directory:
   export BUN_DIR=${BUN_DIR:-$HOME/.bun}
   # Whether to enable bun completion:
-  export BUN_ENABLE_COMPLETION=${BUN_ENABLE_COMPLETION:-true}
+  export BUN_COMPLETION=${BUN_COMPLETION:-true}
 
   # @see https://bun.sh/docs/installation
   function install_bun() {
@@ -32,7 +32,7 @@
 
   # Load bun completion if enabled
   function load_bun_completion() {
-    if $BUN_ENABLE_COMPLETION; then
+    if $BUN_COMPLETION; then
       source $BUN_DIR/_bun
     fi
   }
