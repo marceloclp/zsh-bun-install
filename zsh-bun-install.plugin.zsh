@@ -33,7 +33,7 @@
   # Load bun completion if enabled
   function load_bun_completion() {
     if $BUN_COMPLETION; then
-      source $BUN_DIR/_bun
+      [ -s "$BUN_DIR/_bun" ] && source "$BUN_DIR/_bun"
     fi
   }
 
